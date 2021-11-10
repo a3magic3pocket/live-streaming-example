@@ -1,0 +1,150 @@
+html {
+  overflow: hidden;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: gray;
+}
+
+.root-wrapper {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  background-color: red;
+  min-height: 100vh;
+  width: 720px;
+}
+@media screen and (max-width: 720px) {
+  .root-wrapper {
+    width: 100%;
+  }
+}
+
+.room-name-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.room-name-input-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.setting-wrapper {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  justify-content: space-between;
+  background-color: royalblue;
+  height: 32vh;
+  margin-left: 1rem;
+}
+
+.room-name {
+  font-size: 1.4rem;
+}
+@media screen and (max-width: 720px) {
+  .room-name {
+    font-size: 1rem;
+  }
+}
+
+.change-chat-id-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.chat-id {
+  font-size: 1.4rem;
+}
+@media screen and (max-width: 720px) {
+  .chat-id {
+    font-size: 1rem;
+  }
+}
+
+.streaming-wrapper {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid red;
+  height: 68vh;
+}
+
+.video-wrapper {
+  display: flex;
+  border: 1px solid black;
+  background-color: aqua;
+  height: 70%;
+}
+
+.chat-wrapper {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  background-color: chocolate;
+  height: 30%;
+}
+
+.chat-display-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100% - 2rem);
+  background-color: teal;
+  overflow-y: scroll;
+}
+
+.chat-display {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-input-wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 2rem;
+}
+
+.chat-submit {
+  width: 3rem;
+}
+
+.chat-input {
+  width: 100%;
+  /* font-size: 3rem; */
+}
+
+.rmpt-address-create-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+/* #log {
+  background: white;
+  margin: 0;
+  padding: 0.5em 0.5em 0.5em 0.5em;
+  position: absolute;
+  top: 0.5em;
+  left: 0.5em;
+  right: 0.5em;
+  bottom: 3em;
+  overflow: auto;
+}
+
+#form {
+  padding: 0 0.5em 0 0.5em;
+  margin: 0;
+  position: absolute;
+  bottom: 1em;
+  left: 0px;
+  width: 100%;
+  overflow: hidden;
+} */

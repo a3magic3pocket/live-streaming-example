@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/public/css/home.css" />
+    <script src="/public/js/home.js" defer></script>
+    <title>LIVE STREAMING EXAMPLE</title>
+  </head>
+  <body>
+    <div class="root-wrapper">
+      <div class="setting-wrapper">
+        <div class="room-name-wrapper">
+          <div class="room-name" id="room-name"></span></div>
+          <label for="room-name-input">방 이름 변경: </label>
+          <div class="room-name-input-wrapper">
+            <input type="text" id="room-name-input" />
+            <button>변경</button>
+          </div>
+        </div>
+
+        <div class="chat-id-wrapper">
+          <div class="chat-id" id="chat-id"></div>
+          <label for="chat-id-input">아이디 변경: </label>
+          <div class="change-chat-id-wrapper">
+            <input type="text" id="chat-id-input" />
+            <button>변경</button>
+          </div>
+        </div>
+
+        <div class="rmtp-address-wrapper">
+          <div class="rmpt-address-create-wrapper">
+            <div class="rmpt-address">rmpt-address</div>
+            <button>발급</button>
+          </div>
+          <div class="rmpt-address-status">상태</div>
+        </div>
+      </div>
+      <div class="streaming-wrapper">
+        <div class="video-wrapper">asdfa</div>
+        <div class="chat-wrapper">
+          <div class="chat-display-wrapper">
+            <div class="chat-display">chat 1</div>
+            <div class="chat-display">chat 1</div>
+            <div class="chat-display">chat 1</div>
+            <div class="chat-display">chat 1</div>
+            <div class="chat-display">chat 1</div>
+            <div class="chat-display">chat 1</div>
+            <div class="chat-display">chat 1</div>
+            <div class="chat-display">chat 1</div>
+            <div class="chat-display">chat 1</div>
+            <div class="chat-display">chat 1</div>
+            <div class="chat-display">chat 1</div>
+            <div class="chat-display">chat 1</div>
+            <div class="chat-display">chat 1</div>
+            <div class="chat-display">chat 1</div>
+            <div class="chat-display">chat 1</div>
+            <div class="chat-display">chat 1</div>
+            <div class="chat-display">chat 1</div>
+          </div>
+          <div class="chat-input-wrapper">
+            <button class="chat-submit">전송</button>
+            <input class="chat-input" autofocus />
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", function () {
+        setDefaultRoomName();
+        setDefaultChatID();
+      });
+    </script>
+  </body>
+</html>
