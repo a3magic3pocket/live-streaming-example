@@ -44,7 +44,6 @@ func SetupRouter(hubs *ws.Hubs) *gin.Engine {
 		rtmpURL := os.Getenv("rtmpURL")
 		hlsURL := os.Getenv("hlsURL")
 		apiURL := os.Getenv("apiURL")
-		fmt.Println("rtmpURL", rtmpURL)
 		c.HTML(http.StatusOK, "home.html", gin.H{
 			"rtmpURL": template.URL(rtmpURL),
 			"hlsURL":  template.URL(hlsURL),
