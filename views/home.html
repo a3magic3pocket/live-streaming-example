@@ -13,7 +13,8 @@
       rtmp-url="{{ .rtmpURL }}"
       hls-url="{{ .hlsURL }}"
       api-url="{{ .apiURL }}"
-      src="/public/js/home-es5.js"
+      {{/* src="/public/js/home-es5.js" */}}
+      src="/public/js/home.js"
       defer
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest" defer></script>
@@ -21,7 +22,7 @@
     <title>LIVE STREAMING EXAMPLE</title>
   </head>
   <body>
-    <div class="root-wrapper">
+    <div class="root-wrapper" id="root-wrapper">
       <div class="setting-wrapper">
         <div class="room-name-wrapper">
           <label for="room-name-input">방 변경: </label>
@@ -78,16 +79,11 @@
             onsubmit="return handleChatSubmit(event)"
           >
             <input id="chat-input" class="chat-input" />
-            <button
-              type="submit"
-              class="chat-submit"
-              onfocus="window.location.href='#chat-input'; return true;"
-            >
-              전송
-            </button>
+            <button type="submit" class="chat-submit">전송</button>
           </form>
         </div>
       </div>
+      <div class="dummy"></div>
     </div>
   </body>
 </html>

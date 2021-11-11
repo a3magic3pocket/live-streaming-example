@@ -4,16 +4,25 @@ document.addEventListener("DOMContentLoaded", function () {
   setConn();
   reloadVideo();
   initVideoSize();
+  innerHeight = window.innerHeight;
 
   const clipboard = new ClipboardJS(".clip-board-btn");
+  const dummyElem = document.createElement("div");
+
+  window.addEventListener("resize", function () {
+    dummy = innerHeight - window.innerHeight;
+    dummyElem.style.height = `${dummy}px`;
+  });
 });
 
 let conn;
+let innerHeight;
+let dummy = 0;
 let videoInitWidth;
 let videoInitHeight;
-const rtmpURL = document.getElementById("home-js").getAttribute("rtmp-uRL");
-const hlsURL = document.getElementById("home-js").getAttribute("hls-uRL");
-const apiURL = document.getElementById("home-js").getAttribute("api-uRL");
+const rtmpURL = document.getElementById("home-js").getAttribute("rtmp-url");
+const hlsURL = document.getElementById("home-js").getAttribute("hls-url");
+const apiURL = document.getElementById("home-js").getAttribute("api-url");
 
 // getRandomInt() : 0~100000 사이의 랜덤 정수를 얻습니다.
 function getRandomInt() {

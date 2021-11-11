@@ -2,6 +2,7 @@ package router
 
 import (
 	"fmt"
+	"html/template"
 	"live-streaming-example/ws"
 	"net/http"
 	"os"
@@ -43,10 +44,11 @@ func SetupRouter(hubs *ws.Hubs) *gin.Engine {
 		rtmpURL := os.Getenv("rtmpURL")
 		hlsURL := os.Getenv("hlsURL")
 		apiURL := os.Getenv("apiURL")
+		fmt.Println("rtmpURL", rtmpURL)
 		c.HTML(http.StatusOK, "home.html", gin.H{
-			rtmpURL: rtmpURL,
-			hlsURL:  hlsURL,
-			apiURL:  apiURL,
+			"rtmpURL": template.URL(rtmpURL),
+			"hlsURL":  template.URL(hlsURL),
+			"apiURL":  template.URL(apiURL),
 		})
 	})
 	router.GET("/ws", func(c *gin.Context) {
