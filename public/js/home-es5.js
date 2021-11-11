@@ -13,9 +13,9 @@ document.addEventListener("DOMContentLoaded", function () {
 var conn = void 0;
 var videoInitWidth = void 0;
 var videoInitHeight = void 0;
-var rtmpURL = "rtmp://your-rtmpURL";
-var hlsURL = "http://your-hlsULR";
-var apiURL = "http://your-apiURL";
+var rtmpURL = document.getElementById("home-js").getAttribute("rtmp-uRL");
+var hlsURL = document.getElementById("home-js").getAttribute("hls-uRL");
+var apiURL = document.getElementById("home-js").getAttribute("api-uRL");
 
 // getRandomInt() : 0~100000 사이의 랜덤 정수를 얻습니다.
 function getRandomInt() {
@@ -44,20 +44,26 @@ function handleRoomNamePointerEnter() {
 function getRtmpAddress() {
   var roomNameElem = document.querySelector("#room-name");
   var rtmpAddrStatusElem = document.querySelector("#rtmp-address-status");
-  if (typeof roomNameElem === "undefined" || typeof rtmpAddrStatusElem === "undefined") {
+  if (
+    typeof roomNameElem === "undefined" ||
+    typeof rtmpAddrStatusElem === "undefined"
+  ) {
     throw new Error("failed to handleRoomNameClick");
   }
 
   var channel = roomNameElem.innerText;
   var url = apiURL + "/control/get?room=" + channel;
-  fetch(url).then(function (res) {
-    return res.json();
-  }).then(function (response) {
-    rtmpAddrStatusElem.value = rtmpURL + "/" + response.data;
-  }).catch(function (e) {
-    console.log("e", e);
-    rtmpAddrStatusElem.innerText = "failed to get rtmp-address";
-  });
+  fetch(url)
+    .then(function (res) {
+      return res.json();
+    })
+    .then(function (response) {
+      rtmpAddrStatusElem.value = rtmpURL + "/" + response.data;
+    })
+    .catch(function (e) {
+      console.log("e", e);
+      rtmpAddrStatusElem.innerText = "failed to get rtmp-address";
+    });
 }
 
 // initVideoSize : 비디오 크기 조절
@@ -103,7 +109,11 @@ function handleRoomNameClick(event) {
   var roomNameInputElem = document.querySelector("#room-name-input");
   var roomNameStatusElem = document.querySelector("#room-name-status");
   var roomNameElem = document.querySelector("#room-name");
-  if (typeof roomNameInputElem === "undefined" || typeof roomNameStatusElem === "undefined" || typeof roomNameElem === "undefined") {
+  if (
+    typeof roomNameInputElem === "undefined" ||
+    typeof roomNameStatusElem === "undefined" ||
+    typeof roomNameElem === "undefined"
+  ) {
     throw new Error("failed to handleRoomNameClick");
   }
 
@@ -114,7 +124,8 @@ function handleRoomNameClick(event) {
 
   var re = /[^A-z0-9-]+/g;
   if (roomNameInputElem.value.match(re)) {
-    roomNameStatusElem.innerText = "방이름은 알파벳, 숫자, -(dash)만 허용됩니다.";
+    roomNameStatusElem.innerText =
+      "방이름은 알파벳, 숫자, -(dash)만 허용됩니다.";
     return;
   }
 
@@ -141,7 +152,10 @@ function appendChatLog(elem) {
   var chatLogWrapElem = document.querySelector("#chat-log-wrapper");
   var chatLogElems = document.querySelectorAll(".chat-log");
   var numDisplay = 5;
-  if (typeof chatLogWrapElem === "undefined" || typeof chatLogElems === "undefined") {
+  if (
+    typeof chatLogWrapElem === "undefined" ||
+    typeof chatLogElems === "undefined"
+  ) {
     alert("asdfas");
     return;
   }
@@ -172,7 +186,9 @@ function setConn() {
       channel = roomNameElem.innerText;
     }
 
-    conn = new WebSocket("ws://" + document.location.host + "/ws?channel=" + channel);
+    conn = new WebSocket(
+      "ws://" + document.location.host + "/ws?channel=" + channel
+    );
     var item = document.createElement("div");
     item.innerHTML = "<b>Connection to " + channel + " created.</b>";
     appendChatLog(item);

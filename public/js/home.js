@@ -11,9 +11,9 @@ document.addEventListener("DOMContentLoaded", function () {
 let conn;
 let videoInitWidth;
 let videoInitHeight;
-const rtmpURL = "rtmp://your-rtmpURL";
-const hlsURL = "http://your-hlsULR";
-const apiURL = "http://your-apiURL";
+const rtmpURL = document.getElementById("home-js").getAttribute("rtmp-uRL");
+const hlsURL = document.getElementById("home-js").getAttribute("hls-uRL");
+const apiURL = document.getElementById("home-js").getAttribute("api-uRL");
 
 // getRandomInt() : 0~100000 사이의 랜덤 정수를 얻습니다.
 function getRandomInt() {

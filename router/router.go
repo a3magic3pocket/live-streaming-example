@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"live-streaming-example/ws"
 	"net/http"
+	"os"
 	"path/filepath"
 	"runtime"
 
@@ -39,7 +40,14 @@ func SetupRouter(hubs *ws.Hubs) *gin.Engine {
 
 	// Route
 	router.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "home.html", gin.H{})
+		rtmpURL := os.Getenv("rtmpURL")
+		hlsURL := os.Getenv("hlsURL")
+		apiURL := os.Getenv("apiURL")
+		c.HTML(http.StatusOK, "home.html", gin.H{
+			rtmpURL: rtmpURL,
+			hlsURL:  hlsURL,
+			apiURL:  apiURL,
+		})
 	})
 	router.GET("/ws", func(c *gin.Context) {
 		channel := c.Request.URL.Query().Get("channel")

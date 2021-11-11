@@ -6,6 +6,7 @@ package main
 
 import (
 	"live-streaming-example/router"
+	"live-streaming-example/utils"
 	"live-streaming-example/ws"
 	"time"
 )
@@ -27,6 +28,8 @@ func cleanUpHubs(hs *ws.Hubs) {
 }
 
 func main() {
+	utils.LoadEnv()
+
 	var hubs = ws.Hubs{}
 	go cleanUpHubs(&hubs)
 

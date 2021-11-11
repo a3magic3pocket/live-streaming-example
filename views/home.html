@@ -1,3 +1,5 @@
+{{ define "home.html" }}
+
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -6,7 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="/public/css/home.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="/public/js/home-es5.js" defer></script>
+    <script
+      id="home-js"
+      rtmp-url="{{ .rtmpURL }}"
+      hls-url="{{ .hlsURL }}"
+      api-url="{{ .apiURL }}"
+      src="/public/js/home-es5.js"
+      defer
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
     <title>LIVE STREAMING EXAMPLE</title>
@@ -40,7 +49,11 @@
               복사
             </button>
           </div>
-          <textarea class="rtmp-address-status" id="rtmp-address-status" readonly></textarea>
+          <textarea
+            class="rtmp-address-status"
+            id="rtmp-address-status"
+            readonly
+          ></textarea>
         </div>
       </div>
       <div class="streaming-wrapper">
@@ -50,6 +63,7 @@
           autoplay="autoplay"
           muted="muted"
           controls
+          crossorigin="anonymous"
         ></video>
         <div class="chat-wrapper" id="chat-wrapper">
           <div class="user-info">
@@ -64,10 +78,18 @@
             onsubmit="return handleChatSubmit(event)"
           >
             <input id="chat-input" class="chat-input" />
-            <button type="submit" class="chat-submit">전송</button>
+            <button
+              type="submit"
+              class="chat-submit"
+              onfocus="window.location.href='#chat-input'; return true;"
+            >
+              전송
+            </button>
           </form>
         </div>
       </div>
     </div>
   </body>
 </html>
+
+{{ end }}
