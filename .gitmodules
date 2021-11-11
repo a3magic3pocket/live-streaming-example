@@ -1,3 +1,6 @@
 [submodule "livego"]
 	path = livego
 	url = git@github-magic:a3magic3pocket/livego.git
+[submodule "Submod"]
+	url = https://github.com/a3magic3pocket/livego.git
+	branch = master
