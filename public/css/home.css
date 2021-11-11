@@ -1,8 +1,9 @@
 html {
-  overflow: hidden;
 }
 
 body {
+  position: fixed;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,16 +11,14 @@ body {
   margin: 0;
   width: 100%;
   height: 100%;
-  background: gray;
 }
 
 .root-wrapper {
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
-  background-color: red;
-  min-height: 100vh;
+  background-color: black;
   width: 720px;
+  height: 100%;
 }
 @media screen and (max-width: 720px) {
   .root-wrapper {
@@ -37,14 +36,18 @@ body {
   flex-direction: row;
 }
 
+.room-name-status {
+  display: flex;
+  word-break: keep-all;
+}
+
 .setting-wrapper {
   display: flex;
   flex-direction: column;
   border: 1px solid black;
   justify-content: space-between;
-  background-color: royalblue;
-  height: 32vh;
-  margin-left: 1rem;
+  background-color: darkgrey;
+  padding-left: 1rem;
 }
 
 .room-name {
@@ -56,11 +59,6 @@ body {
   }
 }
 
-.change-chat-id-wrapper {
-  display: flex;
-  flex-direction: row;
-}
-
 .chat-id {
   font-size: 1.4rem;
 }
@@ -70,18 +68,30 @@ body {
   }
 }
 
+.rtmp-address-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.rtmp-address-status {
+  display: flex;
+  /* overflow-wrap: break-word; */
+  overflow-y: scroll;
+}
+
 .streaming-wrapper {
   display: flex;
   flex-direction: column;
-  border: 1px solid red;
-  height: 68vh;
+  height: 100%;
 }
 
-.video-wrapper {
+.video {
   display: flex;
-  border: 1px solid black;
-  background-color: aqua;
-  height: 70%;
+  height: 100%;
+  /* height: 399px; */
+  width: 100%;
+  align-items: center;
+  object-fit: scale-down;
 }
 
 .chat-wrapper {
@@ -89,19 +99,29 @@ body {
   flex-direction: column;
   border: 1px solid black;
   background-color: chocolate;
-  height: 30%;
-}
-
-.chat-display-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: calc(100% - 2rem);
-  background-color: teal;
+  height: 10.4rem;
   overflow-y: scroll;
 }
 
-.chat-display {
+.chat-log-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  height: 8.4rem;
+  background-color: slategrey;
+  position: relative;
+  overflow-y: hidden;
+}
+
+.user-info {
+  display: flex;
+  position: relative;
+  top: 0;
+  left: 0;
+  background-color: thistle;
+}
+
+.chat-log {
   display: flex;
   flex-direction: column;
 }
@@ -114,37 +134,16 @@ body {
 }
 
 .chat-submit {
-  width: 3rem;
+  width: 4rem;
 }
 
 .chat-input {
   width: 100%;
+  font-size: 1.2rem;
   /* font-size: 3rem; */
 }
 
-.rmpt-address-create-wrapper {
+.rtmp-address-create-wrapper {
   display: flex;
   flex-direction: row;
 }
-
-/* #log {
-  background: white;
-  margin: 0;
-  padding: 0.5em 0.5em 0.5em 0.5em;
-  position: absolute;
-  top: 0.5em;
-  left: 0.5em;
-  right: 0.5em;
-  bottom: 3em;
-  overflow: auto;
-}
-
-#form {
-  padding: 0 0.5em 0 0.5em;
-  margin: 0;
-  position: absolute;
-  bottom: 1em;
-  left: 0px;
-  width: 100%;
-  overflow: hidden;
-} */

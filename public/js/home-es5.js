@@ -1,3 +1,5 @@
+"use strict";
+
 document.addEventListener("DOMContentLoaded", function () {
   setDefaultRoomName();
   setDefaultChatID();
@@ -5,34 +7,34 @@ document.addEventListener("DOMContentLoaded", function () {
   reloadVideo();
   initVideoSize();
 
-  const clipboard = new ClipboardJS(".clip-board-btn");
+  var clipboard = new ClipboardJS(".clip-board-btn");
 });
 
-let conn;
-let videoInitWidth;
-let videoInitHeight;
-const rtmpURL = "rtmp://your-rtmpURL";
-const hlsURL = "http://your-hlsULR";
-const apiURL = "http://your-apiURL";
+var conn = void 0;
+var videoInitWidth = void 0;
+var videoInitHeight = void 0;
+var rtmpURL = "rtmp://your-rtmpURL";
+var hlsURL = "http://your-hlsULR";
+var apiURL = "http://your-apiURL";
 
 // getRandomInt() : 0~100000 사이의 랜덤 정수를 얻습니다.
 function getRandomInt() {
-  const min = Math.ceil(100000);
-  const max = Math.floor(0);
+  var min = Math.ceil(100000);
+  var max = Math.floor(0);
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
 // setDefaultRoomName() : 기본 방 이름을 지정합니다.
 function setDefaultRoomName() {
-  const roomNameElem = document.querySelector("#room-name");
+  var roomNameElem = document.querySelector("#room-name");
   if (typeof roomNameElem !== "undefined") {
-    roomNameElem.innerText = `RoomName-${getRandomInt()}`;
+    roomNameElem.innerText = "RoomName-" + getRandomInt();
   }
 }
 
 // handleRoomNamePointerEnter() : 방 이름 인풋에 진입할때 상태값을 제거합니다.
 function handleRoomNamePointerEnter() {
-  const roomNameStatusElem = document.querySelector("#room-name-status");
+  var roomNameStatusElem = document.querySelector("#room-name-status");
   if (typeof roomNameStatusElem !== "undefined") {
     roomNameStatusElem.innerText = "";
   }
@@ -40,50 +42,46 @@ function handleRoomNamePointerEnter() {
 
 // getRtmpAddress : 방송을 시작할 수 있는 rtmp 주소를 획득합니다.
 function getRtmpAddress() {
-  const roomNameElem = document.querySelector("#room-name");
-  const rtmpAddrStatusElem = document.querySelector("#rtmp-address-status");
-  if (
-    typeof roomNameElem === "undefined" ||
-    typeof rtmpAddrStatusElem === "undefined"
-  ) {
+  var roomNameElem = document.querySelector("#room-name");
+  var rtmpAddrStatusElem = document.querySelector("#rtmp-address-status");
+  if (typeof roomNameElem === "undefined" || typeof rtmpAddrStatusElem === "undefined") {
     throw new Error("failed to handleRoomNameClick");
   }
 
-  const channel = roomNameElem.innerText;
-  const url = `${apiURL}/control/get?room=${channel}`;
-  fetch(url)
-    .then((res) => res.json())
-    .then((response) => {
-      rtmpAddrStatusElem.value = `${rtmpURL}/${response.data}`;
-    })
-    .catch((e) => {
-      console.log("e", e);
-      rtmpAddrStatusElem.innerText = "failed to get rtmp-address";
-    });
+  var channel = roomNameElem.innerText;
+  var url = apiURL + "/control/get?room=" + channel;
+  fetch(url).then(function (res) {
+    return res.json();
+  }).then(function (response) {
+    rtmpAddrStatusElem.value = rtmpURL + "/" + response.data;
+  }).catch(function (e) {
+    console.log("e", e);
+    rtmpAddrStatusElem.innerText = "failed to get rtmp-address";
+  });
 }
 
 // initVideoSize : 비디오 크기 조절
 function initVideoSize() {
-  const videoElem = document.querySelector("#video");
-  const chatFormElem = document.querySelector("#chat-form");
+  var videoElem = document.querySelector("#video");
+  var chatFormElem = document.querySelector("#chat-form");
   if (typeof chatFormElem === "undefined" || typeof videoElem === "undefined") {
     throw new Error("failed to initVideoSize");
   }
-  const width = videoElem.clientWidth;
-  const height = videoElem.clientHeight;
-  videoElem.style.width = `${width}px`;
-  videoElem.style.maxHeight = `calc(${height}px - 2rem)`;
+  var width = videoElem.clientWidth;
+  var height = videoElem.clientHeight;
+  videoElem.style.width = width + "px";
+  videoElem.style.maxHeight = "calc(" + height + "px - 2rem)";
 }
 
 // reloadVideo : 비디오 로드
 function reloadVideo() {
-  const roomNameElem = document.querySelector("#room-name");
-  const videoElem = document.querySelector("#video");
+  var roomNameElem = document.querySelector("#room-name");
+  var videoElem = document.querySelector("#video");
   if (typeof roomNameElem === "undefined" || typeof videoElem === "undefined") {
     throw new Error("failed to reloadVideo");
   }
-  const channel = roomNameElem.innerText;
-  var videoSrc = `${hlsURL}/${channel}.m3u8`;
+  var channel = roomNameElem.innerText;
+  var videoSrc = hlsURL + "/" + channel + ".m3u8";
   if (Hls.isSupported()) {
     var hls = new Hls();
     hls.loadSource(videoSrc);
@@ -102,14 +100,10 @@ function reloadVideo() {
 function handleRoomNameClick(event) {
   event.preventDefault();
 
-  const roomNameInputElem = document.querySelector("#room-name-input");
-  const roomNameStatusElem = document.querySelector("#room-name-status");
-  const roomNameElem = document.querySelector("#room-name");
-  if (
-    typeof roomNameInputElem === "undefined" ||
-    typeof roomNameStatusElem === "undefined" ||
-    typeof roomNameElem === "undefined"
-  ) {
+  var roomNameInputElem = document.querySelector("#room-name-input");
+  var roomNameStatusElem = document.querySelector("#room-name-status");
+  var roomNameElem = document.querySelector("#room-name");
+  if (typeof roomNameInputElem === "undefined" || typeof roomNameStatusElem === "undefined" || typeof roomNameElem === "undefined") {
     throw new Error("failed to handleRoomNameClick");
   }
 
@@ -118,10 +112,9 @@ function handleRoomNameClick(event) {
     return;
   }
 
-  const re = /[^A-z0-9-]+/g;
+  var re = /[^A-z0-9-]+/g;
   if (roomNameInputElem.value.match(re)) {
-    roomNameStatusElem.innerText =
-      "방이름은 알파벳, 숫자, -(dash)만 허용됩니다.";
+    roomNameStatusElem.innerText = "방이름은 알파벳, 숫자, -(dash)만 허용됩니다.";
     return;
   }
 
@@ -135,9 +128,9 @@ function handleRoomNameClick(event) {
 
 // setDefaultChatID() : 기본 chatID를 설정합니다.
 function setDefaultChatID() {
-  const chatIDElem = document.querySelector("#chat-id");
+  var chatIDElem = document.querySelector("#chat-id");
   if (typeof chatIDElem !== "undefined") {
-    chatIDElem.innerText = `UserID-${getRandomInt()}`;
+    chatIDElem.innerText = "UserID-" + getRandomInt();
   }
 }
 
@@ -145,24 +138,21 @@ function setDefaultChatID() {
 // 채팅 로그를 추가합니다.
 // 채팅 로그가 지정 수보다 늘어나면 가장 오래된 로그를 지우고 추가합니다.
 function appendChatLog(elem) {
-  const chatLogWrapElem = document.querySelector("#chat-log-wrapper");
-  const chatLogElems = document.querySelectorAll(".chat-log");
-  const numDisplay = 5;
-  if (
-    typeof chatLogWrapElem === "undefined" ||
-    typeof chatLogElems === "undefined"
-  ) {
+  var chatLogWrapElem = document.querySelector("#chat-log-wrapper");
+  var chatLogElems = document.querySelectorAll(".chat-log");
+  var numDisplay = 5;
+  if (typeof chatLogWrapElem === "undefined" || typeof chatLogElems === "undefined") {
     alert("asdfas");
     return;
   }
 
   if (chatLogElems.length >= numDisplay) {
-    let start = chatLogElems.length - numDisplay + 1;
+    var start = chatLogElems.length - numDisplay + 1;
     if (start < 0) {
       start = 0;
     }
 
-    for (let i = 0; i < chatLogElems.length; i++) {
+    for (var i = 0; i < chatLogElems.length; i++) {
       if (i < start) {
         chatLogElems[i].remove();
       }
@@ -176,39 +166,37 @@ function appendChatLog(elem) {
 // setConn() : 새 웹소켓 연결을 생성합니다.
 function setConn() {
   if (window["WebSocket"]) {
-    let channel = "";
-    const roomNameElem = document.querySelector("#room-name");
+    var channel = "";
+    var roomNameElem = document.querySelector("#room-name");
     if (typeof roomNameElem !== "undefined") {
       channel = roomNameElem.innerText;
     }
 
-    conn = new WebSocket(
-      "ws://" + document.location.host + "/ws?channel=" + channel
-    );
-    const item = document.createElement("div");
-    item.innerHTML = `<b>Connection to ${channel} created.</b>`;
+    conn = new WebSocket("ws://" + document.location.host + "/ws?channel=" + channel);
+    var item = document.createElement("div");
+    item.innerHTML = "<b>Connection to " + channel + " created.</b>";
     appendChatLog(item);
 
     conn.onclose = function (evt) {
-      let params = new URL(evt.target.url).searchParams;
-      const channel = params.get("channel");
+      var params = new URL(evt.target.url).searchParams;
+      var channel = params.get("channel");
 
-      const item = document.createElement("div");
-      item.innerHTML = `<b>Connection to ${channel} closed.</b>`;
+      var item = document.createElement("div");
+      item.innerHTML = "<b>Connection to " + channel + " closed.</b>";
       appendChatLog(item);
     };
     conn.onmessage = function (evt) {
-      let messages = evt.data.split("\n");
-      for (let i = 0; i < messages.length; i++) {
-        let item = document.createElement("div");
-        item.innerText = messages[i];
-        appendChatLog(item);
+      var messages = evt.data.split("\n");
+      for (var i = 0; i < messages.length; i++) {
+        var _item = document.createElement("div");
+        _item.innerText = messages[i];
+        appendChatLog(_item);
       }
     };
   } else {
-    const item = document.createElement("div");
-    item.innerHTML = "<b>Your browser does not support WebSockets.</b>";
-    appendChatLog(item);
+    var _item2 = document.createElement("div");
+    _item2.innerHTML = "<b>Your browser does not support WebSockets.</b>";
+    appendChatLog(_item2);
   }
 }
 
@@ -216,7 +204,7 @@ function setConn() {
 function handleChatSubmit(event) {
   event.preventDefault();
 
-  const chatInputElem = document.querySelector("#chat-input");
+  var chatInputElem = document.querySelector("#chat-input");
   if (typeof chatInputElem === "undefined") {
     return false;
   }
@@ -227,12 +215,12 @@ function handleChatSubmit(event) {
     return false;
   }
 
-  const chatIDElem = document.querySelector("#chat-id");
+  var chatIDElem = document.querySelector("#chat-id");
   if (typeof chatIDElem === "undefined") {
     return false;
   }
 
-  const messsage = `${chatIDElem.innerText}: ${chatInputElem.value}`;
+  var messsage = chatIDElem.innerText + ": " + chatInputElem.value;
   conn.send(messsage);
   chatInputElem.value = "";
   return false;

@@ -29,6 +29,10 @@ func NewHub() *Hub {
 	}
 }
 
+func (h *Hub) GetNumClients() int {
+	return len(h.clients)
+}
+
 func (h *Hub) Run() {
 	for {
 		select {
@@ -50,4 +54,19 @@ func (h *Hub) Run() {
 			}
 		}
 	}
+}
+
+type Hubs map[string]*Hub
+
+func (hs *Hubs) Delete(channel string) {
+	delete(*hs, channel)
+}
+
+func (hs *Hubs) Get(channel string) (cachedHub *Hub, exists bool) {
+	cachedHub, exists = (*hs)[channel]
+	return cachedHub, exists
+}
+
+func (hs *Hubs) Set(channel string, newHub *Hub) {
+	(*hs)[channel] = newHub
 }

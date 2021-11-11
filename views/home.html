@@ -5,72 +5,69 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="/public/css/home.css" />
-    <script src="/public/js/home.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="/public/js/home-es5.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
     <title>LIVE STREAMING EXAMPLE</title>
   </head>
   <body>
     <div class="root-wrapper">
       <div class="setting-wrapper">
         <div class="room-name-wrapper">
-          <div class="room-name" id="room-name"></span></div>
-          <label for="room-name-input">방 이름 변경: </label>
+          <label for="room-name-input">방 변경: </label>
           <div class="room-name-input-wrapper">
-            <input type="text" id="room-name-input" />
-            <button>변경</button>
+            <input
+              type="text"
+              id="room-name-input"
+              onpointerenter="handleRoomNamePointerEnter()"
+            />
+            <button type="button" onclick="handleRoomNameClick(event)">
+              변경/리로드
+            </button>
           </div>
+          <div class="room-name-status" id="room-name-status"></div>
         </div>
 
-        <div class="chat-id-wrapper">
-          <div class="chat-id" id="chat-id"></div>
-          <label for="chat-id-input">아이디 변경: </label>
-          <div class="change-chat-id-wrapper">
-            <input type="text" id="chat-id-input" />
-            <button>변경</button>
+        <div class="rtmp-address-wrapper">
+          <div class="rtmp-address-create-wrapper">
+            <div class="rtmp-address">방 rtmp-address</div>
+            <button onclick="getRtmpAddress()">재발급</button>
+            <button
+              class="clip-board-btn"
+              data-clipboard-target="#rtmp-address-status"
+            >
+              복사
+            </button>
           </div>
-        </div>
-
-        <div class="rmtp-address-wrapper">
-          <div class="rmpt-address-create-wrapper">
-            <div class="rmpt-address">rmpt-address</div>
-            <button>발급</button>
-          </div>
-          <div class="rmpt-address-status">상태</div>
+          <textarea class="rtmp-address-status" id="rtmp-address-status" readonly></textarea>
         </div>
       </div>
       <div class="streaming-wrapper">
-        <div class="video-wrapper">asdfa</div>
-        <div class="chat-wrapper">
-          <div class="chat-display-wrapper">
-            <div class="chat-display">chat 1</div>
-            <div class="chat-display">chat 1</div>
-            <div class="chat-display">chat 1</div>
-            <div class="chat-display">chat 1</div>
-            <div class="chat-display">chat 1</div>
-            <div class="chat-display">chat 1</div>
-            <div class="chat-display">chat 1</div>
-            <div class="chat-display">chat 1</div>
-            <div class="chat-display">chat 1</div>
-            <div class="chat-display">chat 1</div>
-            <div class="chat-display">chat 1</div>
-            <div class="chat-display">chat 1</div>
-            <div class="chat-display">chat 1</div>
-            <div class="chat-display">chat 1</div>
-            <div class="chat-display">chat 1</div>
-            <div class="chat-display">chat 1</div>
-            <div class="chat-display">chat 1</div>
+        <video
+          id="video"
+          class="video"
+          autoplay="autoplay"
+          muted="muted"
+          controls
+        ></video>
+        <div class="chat-wrapper" id="chat-wrapper">
+          <div class="user-info">
+            <span class="room-name" id="room-name">방이름</span>
+            /
+            <span class="chat-id" id="chat-id"></span>
           </div>
-          <div class="chat-input-wrapper">
-            <button class="chat-submit">전송</button>
-            <input class="chat-input" autofocus />
-          </div>
+          <div class="chat-log-wrapper" id="chat-log-wrapper"></div>
+          <form
+            class="chat-input-wrapper"
+            id="chat-form"
+            onsubmit="return handleChatSubmit(event)"
+          >
+            <input id="chat-input" class="chat-input" />
+            <button type="submit" class="chat-submit">전송</button>
+          </form>
         </div>
       </div>
     </div>
-    <script type="text/javascript">
-      document.addEventListener("DOMContentLoaded", function () {
-        setDefaultRoomName();
-        setDefaultChatID();
-      });
-    </script>
   </body>
 </html>
