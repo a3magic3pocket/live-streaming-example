@@ -1,0 +1,3 @@
+[submodule "livego"]
+	path = livego
+	url = https://github.com/gwuhaolin/livego.git
