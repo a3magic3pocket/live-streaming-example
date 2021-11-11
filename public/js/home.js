@@ -192,7 +192,7 @@ function setConn() {
     }
 
     conn = new WebSocket(
-      "ws://" + apiURL + "/ws?channel=" + channel
+      "ws://" + document.location.host + "/ws?channel=" + channel
     );
     const item = document.createElement("div");
     item.innerHTML = `<b>Connection to ${channel} created.</b>`;
