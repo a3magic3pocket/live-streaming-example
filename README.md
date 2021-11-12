@@ -89,8 +89,9 @@
   - ```bash
       # ubuntu 기준
       sudo ln -s /etc/nginx/sites-available/my-config /etc/nginx/sites-enabled/
+      sudo rm /etc/nginx/sites-enabled/default
       sudo systemctl stop nginx.service
-      sudo system start nginx.service
+      sudo systemctl start nginx.service
     ```
 
 ## 서브모듈 다운로드
@@ -100,7 +101,7 @@
 - 멍령
   - ```bash
       git submodule init
-      git submoudle update
+      git submodule update
     ```
 
 ## 허용해야하는 포트
